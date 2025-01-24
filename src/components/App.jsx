@@ -18,6 +18,8 @@ function App() {
   //creamos la variable para el resultado del dado
   const [diceResult, setDiceResult] = useState(0)
 
+  //crear variable del estado del juego!!!
+
   //Implementa la función rollDice en App.js
   const randomNumber = rollDice(4);
   const rollDice = (max) => { 
