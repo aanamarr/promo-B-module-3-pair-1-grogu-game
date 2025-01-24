@@ -1,6 +1,8 @@
 
 import { useState } from 'react';
 import '../styles/App.scss';
+import Header from './Header';
+import Board from './Board';
 
 function App() {
   //creamos la variable de estado que nos indica en qué posición está grogu
@@ -13,21 +15,40 @@ function App() {
   const [frogsList, setfrogsList] = useState(["🐸","🐸","🐸"])
   //los valores iniciales son las listas (arrays) llenas
   
+  //creamos la variable para el resultado del dado
+  const [diceResult, setDiceResult] = useState(0)
+
+  //Implementa la función rollDice en App.js
+  const randomNumber = rollDice(4);
+  const rollDice = (max) => { 
+    return Math.ceil(Math.random() * max);
+    console.log()
+  }
+
+  /* //esta función me genera un número aleatorio
+function getRandomNumber(max) {
+    return Math.ceil(Math.random() * max);
+   }  
+//esta función me traduce ese número a la acción 'piedra, papel o tijera'
+function numberToAction (){
+    //guardo el número aleatorio (máximo 9) que me ha creado la función
+    const randomNumber = getRandomNumber(9);
+    console.log (randomNumber)
+    //si el número es menor o igual a tres lo voy a guardar con la palabra 'piedra'...
+    if (randomNumber <= 3) {
+        return 'rock'
+    } else if (randomNumber >= 7) {
+        return 'paper'
+    } else {
+        return 'scissors'
+    }
+} */
+
   return (
     <>
-    <header>
-      <h1>¡Cuidado con Grogu!</h1>
-    </header>
+    <Header/>
     <main className="page">
-      <section className="board">
-        <div className="cell"><div className="grogu">👣</div></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-      </section>
+    <Board/>
 
       <section>
         <button className="dice">Lanzar Dado</button>
