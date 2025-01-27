@@ -15,17 +15,46 @@ function App() {
   const [frogsList, setfrogsList] = useState(["🐸","🐸","🐸"])
   //los valores iniciales son las listas (arrays) llenas
   
-  //creamos la variable para el resultado del dado
+  //creamos la variable para el resultado inicial del dado
   const [diceResult, setDiceResult] = useState(0)
 
-  //crear variable del estado del juego!!!
+  // Estado del juego????
+  const [gameStatus, setGameStatus] = useState("En curso");
 
-  //Implementa la función rollDice en App.js
-  const randomNumber = rollDice(4);
+  //Mensaje de estado del juego
+  const [gameMessage, setGameMessage] = useState("")
+
+  //Implementa la función rollDice para generar un número aleatorio entre 1 y 4 nº aleatorio de 1-4
+
+  const rollDice = () => {
+    const randomNumber = Math.ceil(Math.random() * 4);
+    setDiceResult(randomNumber);
+
+    if (randomNumber === 4) {
+      //si el dado es 4, Grogu avanza una posición
+      const newPosition = groguPosition + 1;
+      setGroguPosition(newPosition);
+      setGameMessage("¡Grogu avanza a la posición ${newPosition}!");
+    } else {
+      //Si es un número distinto de 4, Grogu pierde mercancia
+      if (randomNumber === 1) {
+        //si el dado es 1, Grogu pierde una galleta
+        
+        const newCookiesList = cookiesList.slice(0, -1);
+        setCookiesList(newCookiesList);
+        setGameMessage("¡Grogu pierde una galleta!");
+      } else if (randomNumber === 2) {
+    }
+  }
+
+  /*const randomNumber = rollDice(4);
   const rollDice = (max) => { 
     return Math.ceil(Math.random() * max);
-    console.log()
-  }
+  };*/
+
+  // Manejar el evento de lanzar dado nº aleatorio de 1-4
+  
+  
 
   /* //esta función me genera un número aleatorio
 function getRandomNumber(max) {
