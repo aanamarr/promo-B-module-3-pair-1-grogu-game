@@ -11,8 +11,8 @@ function App() {
 
   //creamos la variable de estado para cada mercancía
   const [cookiesList, setCookiesList] = useState(["🍪","🍪","🍪"])
-  const [eggsList, seteggsList] = useState(["🥚","🥚","🥚"])
-  const [frogsList, setfrogsList] = useState(["🐸","🐸","🐸"])
+  const [eggsList, setEggsList] = useState(["🥚","🥚","🥚"])
+  const [frogsList, setFrogsList] = useState(["🐸","🐸","🐸"])
   //los valores iniciales son las listas (arrays) llenas
   
   //creamos la variable para el resultado inicial del dado
@@ -35,15 +35,24 @@ function App() {
       const newPosition = groguPosition + 1;
       setGroguPosition(newPosition);
       setGameMessage("¡Grogu avanza a la posición ${newPosition}!");
-    } else {
+    } else if (eggsList.length || frogsList.length || cookiesList.length > 0){
+      //La siguiente acción se ejecuta sólo si las listas son mayores a 0 (no están vacías)
       //Si es un número distinto de 4, Grogu pierde mercancia
       if (randomNumber === 1) {
-        //si el dado es 1, Grogu pierde una galleta
+        //si el dado es 1, Grogu pierde una galleta etc.
         
         const newCookiesList = cookiesList.slice(0, -1);
         setCookiesList(newCookiesList);
         setGameMessage("¡Grogu pierde una galleta!");
       } else if (randomNumber === 2) {
+        const newEggsList = eggsList.slice(0, -1);
+        setEggsList(newEggsList);
+        setGameMessage("¡Grogu pierde un huevo!");
+      } else if (randomNumber === 3) {
+        const newFrogsList = frogsList.slice(0, -1);
+        setFrogsList(newFrogsList);
+        setGameMessage("¡Grogu pierde una rana!");
+      };
     }
   }
 
@@ -57,11 +66,11 @@ function App() {
   
 
   /* //esta función me genera un número aleatorio
-function getRandomNumber(max) {
+  function getRandomNumber(max) {
     return Math.ceil(Math.random() * max);
    }  
-//esta función me traduce ese número a la acción 'piedra, papel o tijera'
-function numberToAction (){
+  //esta función me traduce ese número a la acción 'piedra, papel o tijera'
+  function numberToAction (){
     //guardo el número aleatorio (máximo 9) que me ha creado la función
     const randomNumber = getRandomNumber(9);
     console.log (randomNumber)
@@ -73,7 +82,7 @@ function numberToAction (){
     } else {
         return 'scissors'
     }
-} */
+  } */
 
   return (
     <>
