@@ -18,11 +18,9 @@ function App() {
   //creamos la variable para el resultado inicial del dado
   const [diceResult, setDiceResult] = useState(0)
 
-  // Estado del juego????
+  // Estado del juego
   const [gameStatus, setGameStatus] = useState("En curso");
 
-  //Mensaje de estado del juego
-  const [gameMessage, setGameMessage] = useState("")
 
   //Implementa la función rollDice para generar un número aleatorio entre 1 y 4 nº aleatorio de 1-4
 
@@ -30,28 +28,33 @@ function App() {
     const randomNumber = Math.ceil(Math.random() * 4);
     setDiceResult(randomNumber);
 
+    console.log(randomNumber);
+    
     if (randomNumber === 4) {
       //si el dado es 4, Grogu avanza una posición
       const newPosition = groguPosition + 1;
       setGroguPosition(newPosition);
-      setGameMessage("¡Grogu avanza a la posición ${newPosition}!");
-    } else if (eggsList.length || frogsList.length || cookiesList.length > 0){
+      setGameStatus(`¡Grogu avanza a la posición ${newPosition}!`);
+      console.log(newPosition);
+    } else if (eggsList.length > 0|| frogsList.length > 0|| cookiesList.length > 0){
       //La siguiente acción se ejecuta sólo si las listas son mayores a 0 (no están vacías)
       //Si es un número distinto de 4, Grogu pierde mercancia
       if (randomNumber === 1) {
         //si el dado es 1, Grogu pierde una galleta etc.
-        
         const newCookiesList = cookiesList.slice(0, -1);
         setCookiesList(newCookiesList);
-        setGameMessage("¡Grogu pierde una galleta!");
+        setGameStatus("¡Grogu pierde una galleta!");
+        console.log(newCookiesList);
       } else if (randomNumber === 2) {
         const newEggsList = eggsList.slice(0, -1);
         setEggsList(newEggsList);
-        setGameMessage("¡Grogu pierde un huevo!");
+        setGameStatus("¡Grogu pierde un huevo!");
+        console.log(newEggsList);
       } else if (randomNumber === 3) {
         const newFrogsList = frogsList.slice(0, -1);
         setFrogsList(newFrogsList);
-        setGameMessage("¡Grogu pierde una rana!");
+        setGameStatus("¡Grogu pierde una rana!");
+        console.log(newFrogsList);
       };
     }
   }
@@ -91,8 +94,8 @@ function App() {
     <Board/>
 
       <section>
-        <button className="dice">Lanzar Dado</button>
-        <div className="game-status">En curso</div>
+        <button className="dice" onClick={rollDice}>Lanzar Dado</button>
+        <div className="game-status">{gameStatus}</div>
       </section>
 
       <section className="goods-container">
