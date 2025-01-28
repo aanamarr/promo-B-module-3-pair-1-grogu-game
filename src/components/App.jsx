@@ -3,6 +3,7 @@ import { useState } from 'react';
 import '../styles/App.scss';
 import Header from './Header';
 import Board from './Board';
+import Dice from './Dice';
 
 function App() {
   //creamos la variable de estado que nos indica en qué posición está grogu
@@ -59,34 +60,6 @@ function App() {
     }
   }
 
-  /*const randomNumber = rollDice(4);
-  const rollDice = (max) => { 
-    return Math.ceil(Math.random() * max);
-  };*/
-
-  // Manejar el evento de lanzar dado nº aleatorio de 1-4
-  
-  
-
-  /* //esta función me genera un número aleatorio
-  function getRandomNumber(max) {
-    return Math.ceil(Math.random() * max);
-   }  
-  //esta función me traduce ese número a la acción 'piedra, papel o tijera'
-  function numberToAction (){
-    //guardo el número aleatorio (máximo 9) que me ha creado la función
-    const randomNumber = getRandomNumber(9);
-    console.log (randomNumber)
-    //si el número es menor o igual a tres lo voy a guardar con la palabra 'piedra'...
-    if (randomNumber <= 3) {
-        return 'rock'
-    } else if (randomNumber >= 7) {
-        return 'paper'
-    } else {
-        return 'scissors'
-    }
-  } */
-
   return (
     <>
     <Header/>
@@ -94,7 +67,7 @@ function App() {
     <Board/>
 
       <section>
-        <button className="dice" onClick={rollDice}>Lanzar Dado</button>
+        <Dice onRollDice={rollDice}/>
         <div className="game-status">{gameStatus}</div>
       </section>
 
