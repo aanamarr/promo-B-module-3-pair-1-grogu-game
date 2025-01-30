@@ -5,8 +5,8 @@ function Dice({onRollDice}) {
         onRollDice();
     }
   return (
-    <button className="dice" onClick={handleDice}>Lanzar Dado</button>
+    <button className="dice" onClick={handleDice}>Lanzar Dado 🎲</button>
   )
 }
 
-export default Dice
+export default Dice;

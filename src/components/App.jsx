@@ -1,9 +1,11 @@
 
+import React from 'react'; // hay que importar React antes de los otros componentes para poder usar JSX
 import { useState } from 'react';
 import '../styles/App.scss';
 import Header from './Header';
 import Board from './Board';
 import Dice from './Dice';
+import Form from './Form';
 
 function App() {
   //creamos la variable de estado que nos indica en qué posición está grogu
@@ -22,53 +24,56 @@ function App() {
   // Estado del juego
   const [gameStatus, setGameStatus] = useState("En curso");
 
+  //Estado para almacenar el nombre del jugador
+  const [name, setName] = useState("");
+
 
   //Implementa la función rollDice para generar un número aleatorio entre 1 y 4 nº aleatorio de 1-4
-
   const rollDice = () => {
     const randomNumber = Math.ceil(Math.random() * 4);
     setDiceResult(randomNumber);
 
-    console.log(randomNumber);
+    console.log(`Dado: ${randomNumber}`);
     
     if (randomNumber === 4) {
       //si el dado es 4, Grogu avanza una posición
       const newPosition = groguPosition + 1;
       setGroguPosition(newPosition);
       setGameStatus(`¡Grogu avanza a la posición ${newPosition}!`);
-      console.log(newPosition);
-    } else if (eggsList.length > 0|| frogsList.length > 0|| cookiesList.length > 0){
-      //La siguiente acción se ejecuta sólo si las listas son mayores a 0 (no están vacías)
-      //Si es un número distinto de 4, Grogu pierde mercancia
+      console.log("Grogu avanza:", newPosition);
+      
+    } else if (eggsList.length > 0|| frogsList.length > 0|| cookiesList.length > 0) {
+      //La siguiente acción se ejecuta sólo si las listas son mayores a 0 (no están vacías)//Si es un número distinto de 4, Grogu pierde mercancia
       if (randomNumber === 1) {
         //si el dado es 1, Grogu pierde una galleta etc.
         const newCookiesList = cookiesList.slice(0, -1);
         setCookiesList(newCookiesList);
-        setGameStatus("¡Grogu pierde una galleta!");
-        console.log(newCookiesList);
+        setGameStatus(`¡${name} has ayudado a Mando a recoger una galleta!`);
+        console.log("Galletas restantes:", newCookiesList);
       } else if (randomNumber === 2) {
         const newEggsList = eggsList.slice(0, -1);
         setEggsList(newEggsList);
-        setGameStatus("¡Grogu pierde un huevo!");
-        console.log(newEggsList);
+        setGameStatus(`¡${name} has ayudado a Mando a recoger un huevo!`);
+        console.log("Huevos restantes:", newEggsList);
       } else if (randomNumber === 3) {
         const newFrogsList = frogsList.slice(0, -1);
         setFrogsList(newFrogsList);
-        setGameStatus("¡Grogu pierde una rana!");
-        console.log(newFrogsList);
+        setGameStatus(`¡${name} has ayudado a Mando a recoger una rana!`);
+        console.log("Ranas restantes:", newFrogsList);
       };
     }
   }
 
   return (
     <>
-    <Header/>
+    <Header name={name} />
+    <Form name={name} setName={setName}/> {/*pasamos la función setName como prop al Form */}
     <main className="page">
-    <Board/>
+    <Board groguPosition={groguPosition}/> {/*pasamos la posición de Grogu como prop*/}	
 
       <section>
-        <Dice onRollDice={rollDice}/>
-        <div className="game-status">{gameStatus}</div>
+        <Dice onRollDice={rollDice}/> {/*pasamos la función rollDice como prop*/}
+        <div className="game-status">{gameStatus}</div> {/*mostramos el estado del juego*/}
       </section>
 
       <section className="goods-container">

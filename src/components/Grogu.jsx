@@ -6,4 +6,4 @@ function Grogu() {
   )
 }
 
-export default Grogu
+export default Grogu;
