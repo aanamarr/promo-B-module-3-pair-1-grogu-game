@@ -1,11 +1,12 @@
 
-import React from 'react'; // hay que importar React antes de los otros componentes para poder usar JSX
+import React, { useEffect } from 'react'; // hay que importar React antes de los otros componentes para poder usar JSX
 import { useState } from 'react';
 import '../styles/App.scss';
 import Header from './Header';
 import Board from './Board';
 import Dice from './Dice';
 import Form from './Form';
+import Footer from './Footer';
 
 function App() {
   //creamos la variable de estado que nos indica en qué posición está grogu
@@ -64,6 +65,15 @@ function App() {
     }
   }
 
+  useEffect(
+    () =>{
+    if (groguPosition < 6 && eggsList.length === 0 && frogsList.length === 0 && cookiesList.length === 0){
+      setGameStatus("Ganaste, Mando completa la misión") 
+    } else if(groguPosition >= 6){
+      setGameStatus("¡¡Grogu se ha comido el cargamento!! Has perdido") 
+    }
+  }, [groguPosition, eggsList, frogsList, cookiesList]);
+
   return (
     <>
     <Header name={name} />
@@ -95,6 +105,7 @@ function App() {
         <button className="restart-button">Reiniciar Juego</button>
       </section>
     </main>
+    <Footer/>
     </>
   );
 }
