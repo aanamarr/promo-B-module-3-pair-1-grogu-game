@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 function Footer() {
   return (
     <footer className="footer">
-        <NavLink >
+        <NavLink > //borrar esta etiqueta, sustituir los <a> por <NavLink>
         <nav>
             <ul>
                 <li className="footer__menu-item">
@@ -26,4 +26,4 @@ function Footer() {
     );
 }
 
-export default Footer
+export default Footer;
