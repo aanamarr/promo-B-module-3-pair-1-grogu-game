@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Grogu from './Grogu'
 
 function Board({groguPosition}) {
+  console.log('Grogu Position:', groguPosition);
   const listCell = useState(Array(7).fill(null))[0];
 
   const newListCell = listCell.map((_, index) => (
@@ -16,12 +17,4 @@ function Board({groguPosition}) {
   );
 }
 
-{/* <div className="cell"><Grogu/></div>
-
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>
-        <div className="cell"></div>*/}
 export default Board;

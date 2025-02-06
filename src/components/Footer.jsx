@@ -1,29 +1,26 @@
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom"
 
 function Footer() {
   return (
     <footer className="footer">
-        <NavLink > //borrar esta etiqueta, sustituir los <a> por <NavLink>
         <nav>
             <ul>
                 <li className="footer__menu-item">
-                    <a className="footer__menu-link" href="#/">A jugar</a>
+                    <NavLink to="/" className={({ isActive }) => isActive ? "footer__menu-link active" : "footer__menu-link"}>A jugar</NavLink>
                 </li>
+
                 <li className="footer__menu-item">
-                    <a className="footer__menu-link active" href="#/instructions"
-                        >¿Cómo se juega?</a
-                        >
+                    <NavLink to= "/instructions" className={({ isActive }) => isActive ? "footer__menu-link active" : "footer__menu-link"}>¿Cómo se juega?</NavLink>
                 </li>
+
                 <li className="footer__menu-item">
-                    <a className="footer__menu-link" href="#/options">Más opciones</a>
+                    <NavLink to="/options" className={({ isActive }) => isActive ? "footer__menu-link active" : "footer__menu-link"}>Más opciones</NavLink>
                 </li>
             </ul>
         </nav>
-        </NavLink>
         
         <small className="footer__copy">© Adalab</small>
     </footer> 
     );
 }
-
 export default Footer;
